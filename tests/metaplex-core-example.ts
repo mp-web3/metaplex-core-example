@@ -4,9 +4,11 @@ import { MetaplexCoreExample } from "../target/types/metaplex_core_example";
 
 import wallet from "../wba-wallet.json"
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-import { createPluginV2, createV1, fetchAssetV1, mplCore, pluginAuthority } from "@metaplex-foundation/mpl-core";
+import { createPluginV2, createV1, fetchAssetV1, mplCore, pluginAuthority, MPL_CORE_PROGRAM_ID } from "@metaplex-foundation/mpl-core";
 import { base58, createSignerFromKeypair, generateSigner, signerIdentity, sol } from "@metaplex-foundation/umi";
-import { PublicKey } from "@solana/web3.js";
+import { Keypair, PublicKey } from "@solana/web3.js";
+import { SYSTEM_PROGRAM_ID } from "@coral-xyz/anchor/dist/cjs/native/system";
+import { TOKEN_PROGRAM_ID } from "@coral-xyz/anchor/dist/cjs/utils/token";
 
 const umi = createUmi("http://127.0.0.1:8899").use(mplCore());
 
@@ -56,6 +58,24 @@ describe("metaplex-core-example", () => {
   it("Is initialized!", async () => {
     // Add your test here.
     const tx = await program.methods.initialize().rpc();
+    console.log("\nYour transaction signature", tx);
+  });
+
+  it("Mint Core Asset", async () => {
+    const asset = Keypair.generate();
+
+    console.log("\nAsset address: ", asset.publicKey.toBase58());
+
+    const tx = await program.methods.mintAsset()
+      .accountsPartial({
+        user: provider.publicKey,
+        mint: asset.publicKey,
+        systemProgram: SYSTEM_PROGRAM_ID,
+        mplCoreProgram: MPL_CORE_PROGRAM_ID,
+      })
+      .signers([asset])
+      .rpc();
+
     console.log("\nYour transaction signature", tx);
   });
 });
