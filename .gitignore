@@ -1,3 +1,5 @@
 
 wba-wallet.json
 /target
+/.anchor
+/node_modules
