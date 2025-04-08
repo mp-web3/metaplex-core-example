@@ -47,6 +47,7 @@ describe("metaplex-core-example", () => {
       name: 'My Nft',
       uri: 'https://example.com/my-nft',
       collection: collectionAsset.publicKey,
+      updateAuthority: keypair.publicKey,
       plugins: [
         {
           plugin: createPluginV2({
