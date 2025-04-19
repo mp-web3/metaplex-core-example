@@ -6,7 +6,6 @@ use mpl_core::{instructions::CreateV1CpiBuilder, types::{Attribute, Attributes, 
 pub struct MintAsset<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
-    /// CHECK: This is the mint account of the asset to be minted
     #[account(mut)]
     pub mint: Signer<'info>,
     pub system_program: Program<'info, System>,
