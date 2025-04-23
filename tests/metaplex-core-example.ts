@@ -2,7 +2,7 @@ import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import { MetaplexCoreExample } from "../target/types/metaplex_core_example";
 
-import wallet from "../wba-wallet.json"
+import wallet from "../Turbin3-wallet.json";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { createPluginV2, createV1, fetchAssetV1, mplCore, pluginAuthority, MPL_CORE_PROGRAM_ID, createCollection } from "@metaplex-foundation/mpl-core";
 import { base58, createSignerFromKeypair, generateSigner, signerIdentity, sol } from "@metaplex-foundation/umi";
@@ -47,7 +47,8 @@ describe("metaplex-core-example", () => {
       name: 'My Nft',
       uri: 'https://example.com/my-nft',
       collection: collectionAsset.publicKey,
-      updateAuthority: keypair.publicKey,
+      // MPL Core program doesn't allow you to specify both a collection and an updateAuthority at the same time
+      // updateAuthority: keypair.publicKey,
       plugins: [
         {
           plugin: createPluginV2({

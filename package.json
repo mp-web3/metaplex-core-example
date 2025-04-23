@@ -5,7 +5,7 @@
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "^0.31.0",
+    "@coral-xyz/anchor": "^0.31.1",
     "@metaplex-foundation/mpl-core": "^1.1.1",
     "@metaplex-foundation/umi": "^0.9.2",
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.2",
